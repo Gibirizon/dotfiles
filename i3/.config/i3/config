@@ -258,3 +258,11 @@ client.unfocused         $overlay0 $base  $text    $rosewater $overlay0
 client.urgent            $peach    $base  $peach   $overlay0  $peach
 client.placeholder       $overlay0 $base  $text    $overlay0  $overlay0
 client.background        $base
+
+# Screenshots
+bindsym Print exec --no-startup-id maim "$HOME/Obrazy/$(date +%s).png"
+bindsym Shift+Print exec --no-startup-id maim --select "$HOME/Obrazy/$(date +%s).png"
+
+# Clipboard Screenshots
+bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
+bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
