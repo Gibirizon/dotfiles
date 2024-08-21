@@ -1,71 +1,31 @@
-local opt = vim.opt
-local o = vim.o
-local g = vim.g
+vim.opt.nu = true
+vim.opt.relativenumber = true
 
--------------------------------------- globals -----------------------------------------
-g.toggle_theme_icon = "   "
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
 
--------------------------------------- options ------------------------------------------
--- o.laststatus = 3
--- o.showmode = false
+vim.opt.smartindent = true
+vim.opt.smarttab = true
+vim.opt.autoindent = true
 
-o.clipboard = "unnamedplus"
--- o.cursorline = true
--- o.cursorlineopt = "number"
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv "HOME" .. "/.vim/undodir"
+vim.opt.undofile = true
 
--- opt.fillchars = { eob = " " }
--- o.ignorecase = true
--- o.smartcase = true
--- o.mouse = "a"
---
--- -- Numbers
--- o.number = true
--- o.numberwidth = 2
--- o.ruler = false
---
--- o.splitbelow = true
--- o.splitright = true
--- o.timeoutlen = 400
---
--- g.loaded_node_provider = 0
--- g.loaded_python3_provider = 0
--- g.loaded_perl_provider = 0
--- g.loaded_ruby_provider = 0
---
--- -- add binaries installed by mason.nvim to path
--- local is_windows = vim.fn.has "win32" ~= 0
--- local sep = is_windows and "\\" or "/"
--- local delim = is_windows and ";" or ":"
--- vim.env.PATH = table.concat({ vim.fn.stdpath "data", "mason", "bin" }, sep) .. delim .. vim.env.PATH
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
 
-opt.nu = true
-opt.relativenumber = true
+vim.opt.termguicolors = true
 
-opt.tabstop = 4
-opt.softtabstop = 4
-opt.shiftwidth = 4
-opt.expandtab = true
+vim.opt.scrolloff = 8
+vim.opt.signcolumn = "yes"
+vim.opt.isfname:append "@-@"
 
-opt.smartindent = true
-opt.smarttab = true
-opt.autoindent = true
-
-opt.swapfile = false
-opt.backup = false
-opt.undodir = os.getenv "HOME" .. "/.vim/undodir"
-opt.undofile = true
-
-opt.hlsearch = false
-opt.incsearch = true
-
-opt.termguicolors = true
-
-opt.scrolloff = 8
-opt.signcolumn = "yes"
-opt.isfname:append "@-@"
-
-opt.updatetime = 50
+vim.opt.updatetime = 50
 
 vim.g.mapleader = " "
 
-opt.colorcolumn = "100"
+vim.opt.colorcolumn = "100"

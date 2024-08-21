@@ -128,3 +128,6 @@ alias mc='source /usr/lib/mc/mc-wrapper.sh'
 
 # yazi 
 source $HOME/.yazi/yazi-wrapper.sh
+
+# nvim - vim
+alias vim=nvim
