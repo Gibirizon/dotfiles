@@ -45,7 +45,7 @@ return {
             -- dap.listeners.before.event_exited["dapui_config"] = function()
             --     dapui.close()
             -- end
-            vim.keymap.set("n", "<C-s>", "<cmd>lua require('dapui').close()<cr>")
+            vim.keymap.set("n", "<C-c>", "<cmd>lua require('dapui').close()<cr>")
         end,
     },
 }
