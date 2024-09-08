@@ -17,6 +17,8 @@ exec_always --no-startup-id numlockx off
 exec_always --no-startup-id setxkbmap -option ctrl:swapcaps
 exec_always --no-startup-id xset s off -dpms
 exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh
+exec_always --no-startup-id xfce4-power-manager
+exec_always --no-startup-id (sleep 5 && xset s off -dpms)&
 
 
 # Font for window titles. Will also be used by the bar unless a different font

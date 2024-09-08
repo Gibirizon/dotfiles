@@ -64,6 +64,7 @@ return {
         event = "InsertEnter",
         dependencies = {
             { "L3MON4D3/LuaSnip" },
+            { "hrsh7th/cmp-nvim-lsp-signature-help" }, 
         },
         config = function()
             local cmp = require "cmp"
@@ -71,6 +72,7 @@ return {
             cmp.setup {
                 sources = {
                     { name = "nvim_lsp" },
+                    { name = 'nvim_lsp_signature_help' },
                 },
                 mapping = cmp.mapping.preset.insert {
                     ["<C-Space>"] = cmp.mapping.complete(),
