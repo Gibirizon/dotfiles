@@ -83,7 +83,9 @@ return {
                 }),
                 snippet = {
                     expand = function(args)
-                        vim.snippet.expand(args.body)
+                        -- vim.snippet.expand(args.body)
+                        require('luasnip').lsp_expand(args.body)
+
                     end,
                 },
             })
@@ -138,12 +140,31 @@ return {
 
             local lspconfig = require "lspconfig"
 
-            local servers = {
-                "pyright",
+            -- Setup for Pyright with specific options
+            lspconfig.pyright.setup {
+                filetypes = { "python" },
+                settings = {
+                    python = {
+                        pythonPath = vim.fn.expand("$HOME/python/bin/python"),
+                        analysis = {
+                            autoImportCompletions = true,
+                            autoSearchPaths = true,
+                            diagnosticMode = "workspace",
+                            typeCheckingMode = "basic",
+                            diagnosticMode = "openFilesOnly",
+                            useLibraryCodeForTypes = true,
+                            reportGeneralTypeIssues = "none",
+                        }
+                    }
+                }
+            }
+
+            -- Setup for other LSPs
+            local other_servers = {
                 "ruff_lsp",
             }
 
-            for _, lsp in ipairs(servers) do
+            for _, lsp in ipairs(other_servers) do
                 lspconfig[lsp].setup {
                     filetypes = { "python" },
                 }
