@@ -29,8 +29,9 @@ return {
                     "ruff-lsp",
                     "black",
                     "debugpy",
+                    "prettier",
                 },
-                automatic_installation = false,
+                automatic_installation = true,
                 handlers = {},
             }
 
@@ -39,6 +40,9 @@ return {
                     null_ls.builtins.formatting.black.with {
                         extra_args = { "--line-length=99", "--preview", "--enable-unstable-feature", "string_processing"},
                     },
+                    null_ls.builtins.formatting.prettier.with({
+                        extra_args = {"--tab-width 4", "--use-tabs"}
+                    }),
                 },
                 on_attach = function(client, bufnr)
                     if client.supports_method "textDocument/formatting" then
