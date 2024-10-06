@@ -8,7 +8,6 @@ return {
                 command = os.getenv('HOME') .. '/python/bin/python';
                 args = { '-m', 'debugpy.adapter' };
             }
-            local dap = require('dap')
             dap.configurations.python = {
                 {
                     type = 'python';
@@ -48,20 +47,40 @@ return {
             vim.keymap.set("n", "<leader>dpr", "<cmd>lua require('dap-python').test_method()<cr>")
         end,
     },
+    -- {
+    --     "rcarriga/nvim-dap-ui",
+    --     dependencies = {
+    --         "mfussenegger/nvim-dap",
+    --         "nvim-neotest/nvim-nio",
+    --     },
+    --     config = function()
+    --         local dap = require "dap"
+    --         local dapui = require "dapui"
+    --         dapui.setup()
+    --         dap.listeners.after.event_initialized["dapui_config"] = function()
+    --             dapui.open()
+    --         end
+    --             vim.keymap.set("n", "<C-c>", "<cmd>lua require('dapui').close()<cr> <bar> :lua require('dap').disconnect()<cr> <bar> :lua require('dap').close()<cr>")
+    --             end,
+    --         },
     {
         "rcarriga/nvim-dap-ui",
-        dependencies = {
-            "mfussenegger/nvim-dap",
-            "nvim-neotest/nvim-nio",
-        },
+        event = "VeryLazy",
+        dependencies = "mfussenegger/nvim-dap",
         config = function()
-            local dap = require "dap"
-            local dapui = require "dapui"
+            local dap = require("dap")
+            local dapui = require("dapui")
+            vim.keymap.set("n", "<C-c>", "<cmd>lua require('dapui').close()<cr> <bar> :lua require('dap').disconnect()<cr> <bar> :lua require('dap').close()<cr>")
             dapui.setup()
             dap.listeners.after.event_initialized["dapui_config"] = function()
                 dapui.open()
             end
-                vim.keymap.set("n", "<C-c>", "<cmd>lua require('dapui').close()<cr> <bar> :lua require('dap').disconnect()<cr> <bar> :lua require('dap').close()<cr>")
-                end,
-            },
+            dap.listeners.before.event_terminated["dapui_config"] = function()
+                dapui.close()
+            end
+            dap.listeners.before.event_exited["dapui_config"] = function()
+                dapui.close()
+            end
+        end
+    },
         }

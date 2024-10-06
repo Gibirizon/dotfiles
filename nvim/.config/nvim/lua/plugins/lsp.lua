@@ -10,6 +10,11 @@ return {
         lazy = false,
         config = true,
     },
+    {
+        "nvimtools/none-ls.nvim",
+        event = "VeryLazy",
+    },
+
 
     {
         "jay-babu/mason-null-ls.nvim",
@@ -29,14 +34,17 @@ return {
                     "ruff-lsp",
                     "black",
                     "debugpy",
+                    "clang-format",
                     "prettier",
+                    "codelldb",
                 },
-                automatic_installation = true,
+                automatic_installation = false,
                 handlers = {},
             }
 
             null_ls.setup {
                 sources = {
+                    null_ls.builtins.formatting.clang_format,
                     null_ls.builtins.formatting.black.with {
                         extra_args = { "--line-length=99", "--preview", "--enable-unstable-feature", "string_processing"},
                     },
@@ -61,6 +69,17 @@ return {
                 end,
             }
         end,
+    },
+    {
+        "jay-babu/mason-nvim-dap.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            "williamboman/mason.nvim",
+            "mfussenegger/nvim-dap",
+        },
+        opts = {
+            handlers = {}
+        },
     },
 
     -- Autocompletion
@@ -132,6 +151,7 @@ return {
             require('mason-lspconfig').setup({
                 ensure_installed = {
                 "pyright",
+                "clangd",
             },
                 handlers = {
                     -- this first function is the "default handler"
@@ -153,7 +173,6 @@ return {
                         analysis = {
                             autoImportCompletions = true,
                             autoSearchPaths = true,
-                            diagnosticMode = "workspace",
                             typeCheckingMode = "basic",
                             diagnosticMode = "openFilesOnly",
                             useLibraryCodeForTypes = true,
@@ -161,6 +180,18 @@ return {
                         }
                     }
                 }
+            }
+
+            -- setup for lua
+            lspconfig.lua_ls.setup {
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = { 'vim' }
+                        }
+                    }
+                }
+
             }
 
             -- Setup for other LSPs
