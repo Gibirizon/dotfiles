@@ -46,7 +46,7 @@ vim.keymap.set("n", "<leader>r", function()
         vim.cmd('terminal python ' .. file_name)
     elseif file_ext == "cpp" then
         -- Compile C++ first
-        local compile_command = 'g++-12 -std=c++17 ' .. file_name .. ' -o ' .. file_base
+        local compile_command = 'g++-12 -std=c++20 ' .. file_name .. ' -o ' .. file_base
         local compile_result = vim.fn.system(compile_command)
         if vim.v.shell_error ~= 0 then
             -- Compilation failed - split the error message into lines
@@ -72,15 +72,15 @@ vim.keymap.set("n", "<leader>r", function()
         -- Start terminal with the compiled executable
         vim.cmd('terminal ./' .. file_base)
         -- Set up cleanup of executable on terminal exit
-        vim.api.nvim_create_autocmd("TermClose", {
-            buffer = buf,
-            once = true,
-            callback = function()
-                if vim.fn.filereadable(file_base) == 1 then
-                    vim.fn.delete(file_base)
-                end
-            end
-        })
+        -- vim.api.nvim_create_autocmd("TermClose", {
+        --     buffer = buf,
+        --     once = true,
+        --     callback = function()
+        --         if vim.fn.filereadable(file_base) == 1 then
+        --             vim.fn.delete(file_base)
+        --         end
+        --     end
+        -- })
     else
         -- Set buffer to normal (not terminal) for showing error
         vim.api.nvim_buf_set_option(buf, 'buftype', 'nofile')
