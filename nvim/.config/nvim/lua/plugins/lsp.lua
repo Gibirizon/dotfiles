@@ -45,7 +45,7 @@ return {
             null_ls.setup {
                 sources = {
                     null_ls.builtins.formatting.clang_format.with {
-                        extra_args = { "-style={IndentWidth: 4}"}
+                        extra_args = { "-style={IndentWidth: 4, Cpp11BracedListStyle: false}"},
                     },
                     null_ls.builtins.formatting.black.with {
                         extra_args = { "--line-length=99", "--preview", "--enable-unstable-feature", "string_processing"},
@@ -132,7 +132,7 @@ return {
 
             -- lsp_attach is where you enable features that only work
             -- if there is a language server active in the file
-            local lsp_attach = function(client, bufnr)
+            local lsp_attach = function(_, bufnr)
                 local opts = {buffer = bufnr}
 
                 vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)

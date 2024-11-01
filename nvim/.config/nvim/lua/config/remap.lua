@@ -1,4 +1,5 @@
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+-- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -96,3 +97,11 @@ vim.keymap.set("n", "<leader>r", function()
     -- Automatically enter insert mode in the terminal
     vim.cmd('startinsert')
 end, { silent = true })
+
+-- autocommand to set the file type to scss for tcss
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+  pattern = {"*.tcss"},
+  callback = function()
+        vim.cmd("set filetype=scss")
+    end,
+})
