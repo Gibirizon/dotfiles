@@ -31,7 +31,7 @@ return {
 
             require("mason-null-ls").setup {
                 ensure_installed = {
-                    "ruff-lsp",
+                    "ruff",
                     "black",
                     "debugpy",
                     "clang-format",
@@ -198,7 +198,7 @@ return {
 
             -- Setup for other LSPs
             local other_servers = {
-                "ruff_lsp",
+                "ruff",
             }
 
             for _, lsp in ipairs(other_servers) do
