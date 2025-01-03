@@ -29,3 +29,10 @@ vim.opt.updatetime = 50
 vim.g.mapleader = " "
 
 vim.opt.colorcolumn = "100"
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "cpp",
+    callback = function()
+        vim.opt_local.commentstring = '// %s'
+    end
+})

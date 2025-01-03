@@ -1,10 +1,5 @@
 return {
     {
-        "echasnovski/mini.comment",
-        event = "VeryLazy",
-        opts = {},
-    },
-    {
         "iamcco/markdown-preview.nvim",
         cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
         build = "cd app && npx --yes yarn install",

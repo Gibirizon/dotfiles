@@ -15,10 +15,9 @@ set $sm DP-0
 
 exec_always --no-startup-id numlockx off
 exec_always --no-startup-id setxkbmap -option ctrl:swapcaps
-exec_always --no-startup-id xset s off -dpms
 exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh
 exec_always --no-startup-id xfce4-power-manager
-exec_always --no-startup-id (sleep 5 && xset s off -dpms && xset r rate 250 40)
+exec_always --no-startup-id xset r rate 250 40
 
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -38,7 +37,9 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# I'm using xfce4 powermanager, so comment this line
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.

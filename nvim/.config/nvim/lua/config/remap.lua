@@ -47,6 +47,7 @@ vim.keymap.set("n", "<leader>r", function()
         vim.cmd('terminal python ' .. file_name)
     elseif file_ext == "cpp" then
         -- Compile C++ first
+        -- local compile_command = 'g++-12 -std=c++20 -Werror -Wall -Wextra -Weffc++ -Wconversion -Wsign-conversion --debug ' .. file_name .. ' -o ' .. file_base
         local compile_command = 'g++-12 -std=c++20 --debug ' .. file_name .. ' -o ' .. file_base
         local compile_result = vim.fn.system(compile_command)
         if vim.v.shell_error ~= 0 then

@@ -1,9 +1,7 @@
 killall -q polybar
-if type "xrandr"; then
-  for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-    MONITOR=$m polybar --reload toph &
-  done
-else
-  polybar --reload toph &
-fi
-
+# Launch bar on each monitor, tray on primary
+polybar --list-monitors | while IFS=$'\n' read line; do
+  monitor=$(echo $line | cut -d':' -f1)
+  primary=$(echo $line | cut -d' ' -f3)
+  MONITOR=$monitor polybar --reload "top${primary:+"-primary"}" &
+done

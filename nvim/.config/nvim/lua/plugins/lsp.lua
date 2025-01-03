@@ -64,15 +64,23 @@ return {
                             group = augroup,
                             buffer = bufnr,
                             callback = function()
-                                        -- save current position
-                                        local pos = vim.api.nvim_win_get_cursor(0)
+                                -- save current position
+                                local original_pos = vim.api.nvim_win_get_cursor(0)
 
-                                        -- strip trailing whitespace
-                                        vim.cmd([[%s/\s\+$//e]])
-                                        vim.lsp.buf.format { bufnr = bufnr }
+                                -- strip trailing whitespace
+                                vim.cmd([[%s/\s\+$//e]])
+                                vim.lsp.buf.format { bufnr = bufnr }
 
-                                        -- restore cursor position
-                                        vim.api.nvim_win_set_cursor(0, pos)
+                                -- restore cursor position or move to last line while keeping original column
+                                local new_line_count = vim.api.nvim_buf_line_count(0)
+                                if original_pos[1] > new_line_count then
+                                    -- Move cursor to the last line, keeping the original column (or last column if original column is too long)
+                                    local last_line_length = vim.api.nvim_buf_get_lines(0, new_line_count - 1, new_line_count, false)[1]:len()
+                                    local new_col = math.min(original_pos[2], last_line_length)
+                                    vim.api.nvim_win_set_cursor(0, {new_line_count, new_col})
+                                else
+                                    vim.api.nvim_win_set_cursor(0, original_pos)
+                                end
                             end,
                         })
                     end
